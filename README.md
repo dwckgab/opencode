@@ -1,8 +1,8 @@
 # Multi-Agente Autônomo — OpenCode
 
-Hierarquia de 22 agentes (1 orquestrador + 4 coordenadores + 17 especialistas)
+Hierarquia de 25 agentes (1 orquestrador + 5 coordenadores + 19 especialistas)
 que constrói um projeto inteiro do início ao fim sem intervenção humana.
-O orquestrador só fala com os 4 coords; cada coord comanda seu time em paralelo.
+O orquestrador só fala com os 5 coords; cada coord comanda seu time em paralelo.
 
 ## Agentes
 
@@ -12,6 +12,7 @@ O orquestrador só fala com os 4 coords; cada coord comanda seu time em paralelo
 | `coord-frontend` | `fe-pages` (rotas/telas), `fe-components` (design system), `fe-state` (store/api-client), `fe-a11y` (a11y/i18n/performance) |
 | `coord-backend` | `be-data` (banco), `be-domain` (regras), `be-auth` (login/RBAC), `be-api` (rotas + `API.md`), `be-integrations` (webhooks/filas) |
 | `coord-plataforma` | `plat-infra` (Docker/CI/deploy), `plat-docs` (README/API/ADRs), `plat-observability` (logs/métricas/alertas) |
+| `coord-pesquisa` | `web-researcher` (pesquisa com fontes), `web-operator` (browser via Playwright com evidências) |
 | `coord-qualidade` | `qa-unit` (lint/build/testes), `qa-contrato` (front x API x back), `qa-e2e` (Playwright/Cypress), `qa-security` e `qa-quality` (revisores read-only) |
 
 Todos os subagentes são `hidden` (só o chefe direto chama via Task). Gates do `coord-qualidade` rodam nesta ordem: unit -> contrato -> e2e -> security -> quality.
@@ -25,11 +26,12 @@ Estrutura deste repo (pronta para copiar):
   agents/
     orquestrador.md
     coord-frontend.md  coord-backend.md
-    coord-plataforma.md  coord-qualidade.md
+    coord-plataforma.md  coord-pesquisa.md  coord-qualidade.md
     fe-pages.md  fe-components.md  fe-state.md  fe-a11y.md
     be-api.md  be-auth.md  be-domain.md  be-data.md  be-integrations.md
     plat-infra.md  plat-docs.md  plat-observability.md
     qa-unit.md  qa-contrato.md  qa-e2e.md  qa-security.md  qa-quality.md
+    web-researcher.md  web-operator.md
 opencode.json.example
 install.ps1
 install.sh
@@ -93,6 +95,7 @@ opencode run "Crie um app X com Y e Z. Complete e teste tudo."
 - Depois dispara os coords **simultaneamente** (frontend+backend+plataforma); cada coord comanda seu time com ownership de pastas (1 arquivo = 1 dono por rodada).
 - Gates via `coord-qualidade`: unit -> contrato -> e2e -> security -> quality. Correção volta ao coord dono, nunca ao QA editar produção.
 - Veredito final: só finaliza com `LIBERADO` (sem CRÍTICO, e2e passando). Cada nível devolve relatório padronizado; conflito cross-team é decidido pelo orquestrador.
+- Modo autônomo total: checkpoint em `PLANO.md` + commit a cada retorno de coord; se a sessão cair, ele retoma por `PLANO.md` + `MEMORIA.md` + `git log`. Missões de pesquisa/browser vão pelo `coord-pesquisa` (briefing com fontes, operação com evidências).
 
 ## Aprendizado contínuo
 
@@ -105,7 +108,7 @@ Os agentes aprendem sozinhos ao longo dos projetos via `.opencode/memory/`:
 
 ## Custos e limites
 
-- 22 agentes = muitos tokens. Monitore no painel do seu provedor. Para escopo pequeno, peça ao orquestrador para usar só os coords necessários.
+- 25 agentes = muitos tokens. Monitore no painel do seu provedor. Para escopo pequeno, peça ao orquestrador para usar só os coords necessários.
 - Limites já vêm configurados: `orquestrador steps: 150`, coords `60-80`, workers `30-50`, `temperature: 0.1-0.3` para respostas determinísticas.
 - Para apertar mais, edite `steps:` no frontmatter do agente.
 - Revise sempre antes de push/deploy — os agentes só fazem commit local.
@@ -130,4 +133,4 @@ Os agentes aprendem sozinhos ao longo dos projetos via `.opencode/memory/`:
 - `Task tool` não lista subagente: confira `permission.task` no `orquestrador.md` — `deny` remove da descrição da tool.
 - `install.ps1` bloqueado (ExecutionPolicy): rode com `powershell -ExecutionPolicy Bypass -File install.ps1 -ProjectPath "C:\caminho\meu-projeto"`.
 - `install.sh` com erro de `bash\r` no Linux: atualize — o repo agora tem `.gitattributes` forçando `eol=lf` em `*.sh`.
-- Agente parado esperando aprovação no meio da madrugada: confira se alguma permissão está como `ask` (ex: `external_directory`). Nos 22 agentes o padrão é `deny`/`allow` justamente para não travar sem humano.
+- Agente parado esperando aprovação no meio da madrugada: confira se alguma permissão está como `ask` (ex: `external_directory`). Nos 25 agentes o padrão é `deny`/`allow` justamente para não travar sem humano.

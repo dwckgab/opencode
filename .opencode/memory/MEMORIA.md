@@ -42,3 +42,6 @@ Formato: `- [AAAA-MM-DD] contexto: fato -> ação`
 - [2026-10-09] seed/a11y-i18n: modal sem foco travou navegação por teclado -> foco visível + trap de foco + roles/labels.
 - [2026-10-09] seed/observabilidade: erro sem correlation-id levou 2h para rastrear -> propagar ID por request em logs e respostas de erro.
 - [2026-10-09] seed/docs-onboarding: README com flag inventada travou setup -> comandos copiados de execução real, nunca de cabeça.
+- [2026-10-09] seed/web-research: briefing com 1 fonte caiu em API descontinuada -> triangular com 2+ fontes + data de acesso, marcar não confirmado.
+- [2026-10-09] seed/web-operator: script com senha hardcoded quase foi commitado -> credenciais só via env, dry-run antes de efeito colateral.
+- [2026-10-09] seed/web-operator: sleep fixo no browser quebrou em rede lenta -> waits automáticos + screenshot antes/depois da ação crítica.
