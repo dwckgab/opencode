@@ -26,6 +26,7 @@ Estrutura deste repo (pronta para copiar):
   agents/ (25 agentes: orquestrador, 5 coords, 19 workers)
   memory/MEMORIA.md (regras permanentes + aprendizados)
   skills/ (debug-sistematico, revisao-segura, testes-eficazes)
+tools/audit.py (auditoria: `python3 tools/audit.py`)
 opencode.json.example (base)
 opencode.mimo.json.example (provider MiMo + roteamento pro/flash -> copiar para opencode.json)
 install.ps1 / install.sh (por projeto ou -Global / --global; global instala só agentes+skills)

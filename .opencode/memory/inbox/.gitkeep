@@ -1,0 +1,2 @@
+# Pasta consumida pelo orquestrador: cada worker anexa aqui seu inbox/<agente>.md
+# (este arquivo só existe para versionar a pasta; é ignorado pelo protocolo)
