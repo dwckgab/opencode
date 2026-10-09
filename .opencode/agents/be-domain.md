@@ -29,6 +29,7 @@ Você é dev backend (domínio). Implemente serviços e regras de negócio. Resp
 
 ## Regras
 
+- Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/be-domain.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável (erro+correção, pegadinha de lib, decisão que economizou retrabalho) — nada de log, segredo ou dado pessoal.
 - Dono de: camada de serviço/casos de uso. Sem HTTP e sem SQL direto aqui — receba dados via interfaces e devolva erros de domínio (não códigos HTTP).
 - Regras vindas do escopo viram código + casos de borda tratados (valores nulos, concorrência, idempotência onde couber).
 - Transações e consistência coordenadas com `be-data`. App/testes verdes antes de reportar.

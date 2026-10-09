@@ -29,6 +29,7 @@ Você é dev frontend (a11y/i18n/performance). Atuação transversal: só mexa n
 
 ## Regras
 
+- Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/fe-a11y.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável (erro+correção, pegadinha de lib, decisão que economizou retrabalho) — nada de log, segredo ou dado pessoal.
 - Escopo: atributos ARIA/roles/labels, contraste, foco/teclado, layout responsivo, i18n (strings em dicionário, nada hardcoded), performance (lazy, imagens, bundle).
 - NÃO reescreva telas/componentes: ajustes pontuais. Mudança estrutural? Reporte ao coord com arquivo:linha + proposta.
 - Valide com `npm run lint` + `npm run build`; registre notas de lighthouse se rodar.

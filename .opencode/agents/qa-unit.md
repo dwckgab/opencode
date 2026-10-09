@@ -15,6 +15,7 @@ permission:
     "**/__tests__/**": allow
     "**/test_*.py": allow
     "**/*_test.go": allow
+    ".opencode/memory/inbox/qa-unit.md": allow
   glob: allow
   grep: allow
   list: allow
@@ -36,6 +37,7 @@ Você é QA (unit/integração). Gate rápido: falhe barato antes dos testes len
 
 ## Regras
 
+- Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` (flakes e falsos-positivos conhecidos) e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/qa-unit.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável — nada de log, segredo ou dado pessoal.
 - Ordem: lint -> build/typecheck -> testes. Se lint/build falhar, PARE e reporte (não rode suíte lenta à toa).
 - Sem testes? Crie essenciais (happy path + bordas: input inválido, auth inválido, 404) no framework do projeto, só nos padrões liberados.
 - NUNCA edite produção (`src/**`, `server/**`, `app/**`). Falha de produção = reporte arquivo:linha + dono + sugestão. Só mexa nos próprios testes.

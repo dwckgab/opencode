@@ -29,6 +29,7 @@ Você é dev frontend (design system). Crie/mantenha componentes reutilizáveis 
 
 ## Regras
 
+- Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/fe-components.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável (erro+correção, pegadinha de lib, decisão que economizou retrabalho) — nada de log, segredo ou dado pessoal.
 - Dono de: `src/components`, `src/styles` (tokens, temas). Não edite telas, store ou api-client.
 - Componentes com props tipadas, acessíveis por padrão (roles, labels) e documentados com exemplo de uso.
 - Sem dependência nova sem necessidade real; prefira o que o projeto já usa.

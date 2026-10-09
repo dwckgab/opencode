@@ -39,4 +39,5 @@ Você é revisor de QUALIDADE (read-only). Nada de editar ou rodar build/teste. 
 
 - Veredito: APROVADO / APROVADO COM RESSALVAS / REPROVADO (1 CRÍTICO = REPROVADO)
 - Tabela (máx 15): `| Gravidade | arquivo:linha | problema | correção | dono |`
+- Aprendizados para a MEMORIA (padrão de bug recorrente — o coord repassa)
 - Débitos técnicos aceitáveis (com dono: coord-*)

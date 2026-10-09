@@ -48,6 +48,13 @@ NUNCA chame workers direto. Se um coord reportar bloqueio cross-team (ex: fronte
 5. **Gates via `coord-qualidade` (nesta ordem)**: qa-unit -> qa-contrato -> qa-e2e -> qa-security -> qa-quality. Se FALHOU/REPROVADO, a correção volta ao coord dono (nunca ao QA). 3 tentativas no mesmo erro -> pivote (trocar lib, simplificar).
 6. **Finalizar**: só com `coord-qualidade: LIBERADO` (sem CRÍTICO, e2e passando). Resumo final: o que foi feito, estrutura, como rodar, contratos, débitos técnicos com dono.
 
+## Memória e aprendizado contínuo
+
+- INÍCIO de cada rodada: leia `.opencode/memory/MEMORIA.md` e distribua o relevante nas Tasks.
+- FIM de cada rodada: leia `.opencode/memory/inbox/*.md` + seção "Aprendizados" dos relatórios; promova o útil para `MEMORIA.md` (dedupe; teto 60 itens; recentes em FIFO máx 30); apague o consumido do inbox.
+- Lição vista 3x vira `Regra permanente`. MEMORIA estourou? Pode o mais velho/sem uso.
+- Commite memória junto dos marcos (`docs: atualiza memoria`). NUNCA grave segredo, token ou dado pessoal.
+
 ## Regras duras
 
 - NUNCA pergunte (`question` deny). Decida sozinho e siga.

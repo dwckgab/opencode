@@ -31,7 +31,7 @@ if ($Global) {
 }
 
 if (-not (Test-Path -LiteralPath $ProjectPath)) {
-  throw "Projeto nao encontrado: $ProjectPath"
+  New-Item -ItemType Directory -Path $ProjectPath -Force | Out-Null
 }
 $DestRoot = (Resolve-Path -LiteralPath $ProjectPath).Path
 $DestAgents = Join-Path $DestRoot ".opencode\agents"
@@ -43,6 +43,14 @@ $TargetJson = Join-Path $DestRoot "opencode.json"
 if ((Test-Path -LiteralPath $ExampleJson) -and (-not (Test-Path -LiteralPath $TargetJson))) {
   Copy-Item -LiteralPath $ExampleJson -Destination $TargetJson
   Write-Output "Criado opencode.json a partir do exemplo."
+}
+
+$MemSeed = Join-Path $RepoRoot ".opencode\memory\MEMORIA.md"
+$MemDest = Join-Path $DestRoot ".opencode\memory\MEMORIA.md"
+if ((Test-Path -LiteralPath $MemSeed) -and (-not (Test-Path -LiteralPath $MemDest))) {
+  New-Item -ItemType Directory -Path (Split-Path -Parent $MemDest) -Force | Out-Null
+  Copy-Item -LiteralPath $MemSeed -Destination $MemDest
+  Write-Output "Criada memoria inicial (.opencode/memory/MEMORIA.md)."
 }
 
 # Garante repo git (orquestrador faz commits locais)

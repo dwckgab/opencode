@@ -94,6 +94,15 @@ opencode run "Crie um app X com Y e Z. Complete e teste tudo."
 - Gates via `coord-qualidade`: unit -> contrato -> e2e -> security -> quality. Correção volta ao coord dono, nunca ao QA editar produção.
 - Veredito final: só finaliza com `LIBERADO` (sem CRÍTICO, e2e passando). Cada nível devolve relatório padronizado; conflito cross-team é decidido pelo orquestrador.
 
+## Aprendizado contínuo
+
+Os agentes aprendem sozinhos ao longo dos projetos via `.opencode/memory/`:
+
+- `MEMORIA.md` — regras permanentes + aprendizados recentes (teto 60 itens, FIFO 30). Todo agente lê no início da tarefa.
+- `inbox/<agente>.md` — cada worker anexa até 3 lições por tarefa (um arquivo por agente = sem conflito em paralelo). Coords e revisores mandam aprendizados no relatório.
+- O orquestrador consolida o inbox na MEMORIA a cada rodada (com dedupe), apaga o consumido e commita (`docs: atualiza memoria`). Lição vista 3x vira regra permanente.
+- Antiboato: teto de itens, formato de 1 linha (`- [AAAA-MM-DD] contexto: fato -> ação`) e proibição de segredos/dados pessoais. Para recomeçar do zero, apague `inbox/*` e a seção de recentes.
+
 ## Custos e limites
 
 - 22 agentes = muitos tokens. Monitore no painel do seu provedor. Para escopo pequeno, peça ao orquestrador para usar só os coords necessários.

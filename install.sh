@@ -24,10 +24,7 @@ if [[ "${1:-}" == "--global" ]]; then
 fi
 
 PROJECT_PATH="${1:-.}"
-if [[ ! -d "$PROJECT_PATH" ]]; then
-  echo "ERRO: projeto nao encontrado: $PROJECT_PATH" >&2
-  exit 1
-fi
+mkdir -p "$PROJECT_PATH"
 DEST_AGENTS="$PROJECT_PATH/.opencode/agents"
 mkdir -p "$DEST_AGENTS"
 cp "${SRC_FILES[@]}" "$DEST_AGENTS/"
@@ -35,6 +32,12 @@ cp "${SRC_FILES[@]}" "$DEST_AGENTS/"
 if [[ -f "$REPO_ROOT/opencode.json.example" && ! -f "$PROJECT_PATH/opencode.json" ]]; then
   cp "$REPO_ROOT/opencode.json.example" "$PROJECT_PATH/opencode.json"
   echo "Criado opencode.json a partir do exemplo."
+fi
+
+if [[ -f "$REPO_ROOT/.opencode/memory/MEMORIA.md" && ! -f "$PROJECT_PATH/.opencode/memory/MEMORIA.md" ]]; then
+  mkdir -p "$PROJECT_PATH/.opencode/memory"
+  cp "$REPO_ROOT/.opencode/memory/MEMORIA.md" "$PROJECT_PATH/.opencode/memory/MEMORIA.md"
+  echo "Criada memoria inicial (.opencode/memory/MEMORIA.md)."
 fi
 
 if [[ ! -d "$PROJECT_PATH/.git" ]]; then
