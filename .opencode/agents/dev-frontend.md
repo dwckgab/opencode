@@ -21,7 +21,8 @@ permission:
   webfetch: allow
   websearch: allow
   question: deny
-  external_directory: ask
+  external_directory: deny
+  doom_loop: allow
   skill: allow
 ---
 Você é um dev frontend sênior. Implemente a parte visual/interativa do que foi delegado. Responda em pt-BR.

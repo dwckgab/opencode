@@ -15,20 +15,28 @@ param(
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+$SourceAgents = Join-Path $RepoRoot ".opencode\agents\*.md"
+
+if (-not (Test-Path -LiteralPath (Join-Path $RepoRoot ".opencode\agents"))) {
+  throw "Pasta de origem nao encontrada: $(Join-Path $RepoRoot '.opencode\agents'). Rode este script a partir do clone do repo."
+}
 
 if ($Global) {
   $DestAgents = Join-Path $env:USERPROFILE ".config\opencode\agents"
   New-Item -ItemType Directory -Path $DestAgents -Force | Out-Null
-  Copy-Item -Path (Join-Path $RepoRoot ".opencode\agents\*.md") -Destination $DestAgents -Force
+  Copy-Item -Path $SourceAgents -Destination $DestAgents -Force
   Write-Output "Instalado global em: $DestAgents"
   Write-Output "Use: opencode -> Tab ate 'orquestrador'"
   exit 0
 }
 
-$DestRoot = Resolve-Path -LiteralPath $ProjectPath
+if (-not (Test-Path -LiteralPath $ProjectPath)) {
+  throw "Projeto nao encontrado: $ProjectPath"
+}
+$DestRoot = (Resolve-Path -LiteralPath $ProjectPath).Path
 $DestAgents = Join-Path $DestRoot ".opencode\agents"
 New-Item -ItemType Directory -Path $DestAgents -Force | Out-Null
-Copy-Item -Path (Join-Path $RepoRoot ".opencode\agents\*.md") -Destination $DestAgents -Force
+Copy-Item -Path $SourceAgents -Destination $DestAgents -Force
 
 $ExampleJson = Join-Path $RepoRoot "opencode.json.example"
 $TargetJson = Join-Path $DestRoot "opencode.json"

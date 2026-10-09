@@ -104,7 +104,8 @@ opencode run "Crie um app X com Y e Z. Complete e teste tudo."
 - Sem `model` definido, subagentes herdam o modelo do `orquestrador` — que por sua vez usa o modelo global do seu `opencode.json`.
 - Adicione novos agentes (ex: `.opencode/agents/dev-mobile.md`) e libere no bloco `permission.task` do `orquestrador.md`.
 - Subagentes vêm com `hidden: true` (só o orquestrador chama via Task). Remova se quiser chamar via `@nome` no autocomplete.
-- Autonomia garantida por `question: deny` + `task: {"*": deny}` nos subagentes (evita recursão e trava esperando humano).
+- Autonomia garantida por `question: deny` + `task: {"*": deny}` nos subagentes (evita recursão e trava esperando humano). `external_directory: deny` mantém os agentes dentro do projeto e `doom_loop: allow` deixa a recuperação de loop ser automática, sem prompt.
+- Regras de permissão com glob seguem "última regra vence": o curinga `"*"` vem primeiro e as exceções depois. Não inverta a ordem.
 
 ## Solução de problemas
 
@@ -112,3 +113,6 @@ opencode run "Crie um app X com Y e Z. Complete e teste tudo."
 - Frontend inventando API: garanta que o orquestrador criou `API.md` antes do paralelo. Frontend sem contrato deve criar mock `TODO(mock)` e reportar bloqueador.
 - Loop teste-falha infinito: limite é 3 tentativas no mesmo erro, depois o orquestrador pivota (troca lib/simplifica). Ajuste `steps:` se precisar.
 - `Task tool` não lista subagente: confira `permission.task` no `orquestrador.md` — `deny` remove da descrição da tool.
+- `install.ps1` bloqueado (ExecutionPolicy): rode com `powershell -ExecutionPolicy Bypass -File install.ps1 -ProjectPath "C:\caminho\meu-projeto"`.
+- `install.sh` com erro de `bash\r` no Linux: atualize — o repo agora tem `.gitattributes` forçando `eol=lf` em `*.sh`.
+- Agente parado esperando aprovação no meio da madrugada: confira se alguma permissão está como `ask` (ex: `external_directory`). Nos 5 agentes o padrão é `deny`/`allow` justamente para não travar sem humano.

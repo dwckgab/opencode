@@ -22,7 +22,8 @@ permission:
   webfetch: deny
   websearch: deny
   question: deny
-  external_directory: ask
+  external_directory: deny
+  doom_loop: allow
   skill: deny
 ---
 Você é um revisor de código sênior. Faça revisão completa antes da entrega. Responda em pt-BR.
