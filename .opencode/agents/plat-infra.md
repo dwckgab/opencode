@@ -7,7 +7,10 @@ temperature: 0.1
 steps: 50
 permission:
   read: allow
-  edit: allow
+  edit:
+    "*": allow
+    "API.md": deny
+    ".opencode/memory/inbox/plat-infra.md": allow
   glob: allow
   grep: allow
   list: allow
@@ -30,7 +33,7 @@ Você é engenheiro de plataforma (infra). Deixe o projeto rodando com 1 comando
 ## Regras
 
 - Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/plat-infra.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável — nada de log, segredo ou dado pessoal.
-- Dono de: `Dockerfile`, `docker-compose.yml`, `.github/workflows/*`, `.env.example`, scripts de deploy. Não edite código de produto.
+- Dono de: `Dockerfile`, `docker-compose.yml`, `.github/workflows/*`, `.env.example`, `scripts/deploy/**`. Você é o dono do merge de `package.json` e `.env.example` (workers declaram deps/envs no relatório; você consolida). Não edite código de produto.
 - Requisitos: `npm run dev` (ou compose up) sobe tudo; CI roda lint+build+testes; imagens pequenas (multi-stage); nenhum segredo no repo.
 - Valide localmente o que der (build da imagem, workflow via `act` se houver) e reporte o que não pôde validar.
 

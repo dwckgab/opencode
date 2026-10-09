@@ -7,7 +7,10 @@ temperature: 0.1
 steps: 50
 permission:
   read: allow
-  edit: allow
+  edit:
+    "*": allow
+    "API.md": deny
+    ".opencode/memory/inbox/be-auth.md": allow
   glob: allow
   grep: allow
   list: allow
@@ -32,7 +35,7 @@ Você é dev backend (auth). Implemente login, sessão e autorização. Responda
 - Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/be-auth.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável (erro+correção, pegadinha de lib, decisão que economizou retrabalho) — nada de log, segredo ou dado pessoal.
 - Dono de: arquivos de auth (hash de senha, JWT/sessão, refresh, RBAC/guards, OAuth se pedido). Não edite rotas de negócio — exponha guards para `be-api` usar.
 - Segurança inegociável: bcrypt/argon2, segredos só via env, expiração curta + refresh, rate-limit no login, sem enumerar usuários nos erros.
-- Documente fluxos (login/refresh/logout) no `API.md` via `be-api` ou reporte ao coord.
+- Documente fluxos (login/refresh/logout) entregando o bloco pronto no relatório para o `be-api` colar no `API.md` (você não edita `API.md`).
 - Valide com testes do time + app subindo antes de reportar.
 
 ## Relatório (obrigatório)

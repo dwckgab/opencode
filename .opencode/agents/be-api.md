@@ -7,7 +7,10 @@ temperature: 0.2
 steps: 50
 permission:
   read: allow
-  edit: allow
+  edit:
+    "*": allow
+    "API.md": deny
+    ".opencode/memory/inbox/be-api.md": allow
   glob: allow
   grep: allow
   list: allow
@@ -31,7 +34,7 @@ Você é dev backend (API). Implemente controllers/rotas/middlewares do escopo. 
 
 - Memória: no INÍCIO leia `.opencode/memory/MEMORIA.md` e aplique. No FIM anexe até 3 lições em `.opencode/memory/inbox/be-api.md` (crie se não existir) como `- [AAAA-MM-DD] contexto: fato -> ação`. Só o reaproveitável (erro+correção, pegadinha de lib, decisão que economizou retrabalho) — nada de log, segredo ou dado pessoal.
 - Dono de: camada HTTP (rotas, controllers, middlewares, validação de entrada com zod/pydantic). Regra de negócio vai em `be-domain`; SQL vai em `be-data` — não invada.
-- Siga `API.md` à risca; você ATUALIZA o `API.md` no template padrão a cada entrega (request/response/erros).
+- Siga `API.md` à risca; você NÃO edita `API.md` (single-writer: orquestrador). Mudança necessária? Entregue o diff proposto no relatório + justificativa de compatibilidade.
 - CORS sensato, status codes corretos, erros padronizados. App subindo sem erro antes de reportar.
 
 ## Relatório (obrigatório)

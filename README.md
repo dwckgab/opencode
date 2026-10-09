@@ -23,19 +23,12 @@ Estrutura deste repo (pronta para copiar):
 
 ```
 .opencode/
-  agents/
-    orquestrador.md
-    coord-frontend.md  coord-backend.md
-    coord-plataforma.md  coord-pesquisa.md  coord-qualidade.md
-    fe-pages.md  fe-components.md  fe-state.md  fe-a11y.md
-    be-api.md  be-auth.md  be-domain.md  be-data.md  be-integrations.md
-    plat-infra.md  plat-docs.md  plat-observability.md
-    qa-unit.md  qa-contrato.md  qa-e2e.md  qa-security.md  qa-quality.md
-    web-researcher.md  web-operator.md
-opencode.json.example
-install.ps1
-install.sh
-README.md
+  agents/ (25 agentes: orquestrador, 5 coords, 19 workers)
+  memory/MEMORIA.md (regras permanentes + aprendizados)
+opencode.json.example (copiado para opencode.json só se não existir)
+install.ps1 / install.sh (instalação por projeto ou -Global/-—global, só agentes no global)
+.gitattributes / .gitignore
+README.md / LICENSE
 ```
 
 ## Instalação
@@ -53,12 +46,13 @@ Linux/Mac:
 
 ```bash
 git clone https://github.com/dwckgab/opencode.git
+chmod +x opencode/install.sh  # só se baixado como zip
 ./opencode/install.sh /caminho/meu-projeto
 ```
 
 > Faça o projeto destino ser um repo git antes (`git init`), pois o orquestrador faz commits locais em marcos. Ele nunca faz `git push` (bloqueado por permissão).
 
-Manual: copie `.opencode/` para a raiz do seu projeto e `opencode.json.example` para `opencode.json` (se ainda não tiver um).
+Manual: copie `.opencode/agents/*.md` para `.opencode/agents/` do projeto e `opencode.json.example` para `opencode.json` (só se ainda não existir um — nunca sobrescreve).
 
 ### Opção B — global (todos os projetos)
 
@@ -70,7 +64,7 @@ Manual: copie `.opencode/` para a raiz do seu projeto e `opencode.json.example` 
 ./opencode/install.sh --global
 ```
 
-Destino: `%USERPROFILE%\.config\opencode\agents\` (Linux/Mac: `~/.config/opencode/agents/`)
+Destino: `%USERPROFILE%\.config\opencode\agents\` (Linux/Mac: `~/.config/opencode/agents/`) — somente agentes; config (`opencode.json`) e memória são sempre por projeto.
 
 ## Como usar
 

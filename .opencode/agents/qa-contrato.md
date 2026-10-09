@@ -9,10 +9,8 @@ permission:
   read: allow
   edit:
     "*": deny
-    "**/*.test.*": allow
-    "**/*.spec.*": allow
-    "**/tests/**": allow
-    "**/__tests__/**": allow
+    "**/*.contract.test.*": allow
+    "tests/contract/**": allow
     ".opencode/memory/inbox/qa-contrato.md": allow
   glob: allow
   grep: allow

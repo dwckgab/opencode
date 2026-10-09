@@ -31,7 +31,7 @@ Você é revisor de QUALIDADE (read-only). Nada de editar ou rodar build/teste. 
 ## Checklist (nesta ordem)
 
 1. Bugs: null/undefined, async sem await, erro engolido, race conditions
-2. Contrato: frontend x `API.md` x backend (rota, método, campos, tipos)
+2. Contrato residual pós-`qa-contrato`: só aponte divergência se ela passou pelo gate de contrato (cite a evidência); não refaça a matriz rota-a-rota.
 3. `PLANO.md` cumprido? `TODO` sem dono? Código morto/duplicado?
 4. Performance óbvia: N+1, índice faltando, re-render, bundle gigante
 

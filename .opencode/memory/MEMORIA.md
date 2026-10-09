@@ -45,3 +45,5 @@ Formato: `- [AAAA-MM-DD] contexto: fato -> ação`
 - [2026-10-09] seed/web-research: briefing com 1 fonte caiu em API descontinuada -> triangular com 2+ fontes + data de acesso, marcar não confirmado.
 - [2026-10-09] seed/web-operator: script com senha hardcoded quase foi commitado -> credenciais só via env, dry-run antes de efeito colateral.
 - [2026-10-09] seed/web-operator: sleep fixo no browser quebrou em rede lenta -> waits automáticos + screenshot antes/depois da ação crítica.
+- [2026-10-09] seed/auditoria: 3 agentes editando API.md geraram contrato incoerente -> single-writer (só orquestrador commita, resto propõe diff no relatório).
+- [2026-10-09] seed/auditoria: dois workers no mesmo arquivo em paralelo sobrescreveram código -> 1 arquivo = 1 dono por rodada; transversal (a11y) audita e o dono aplica.

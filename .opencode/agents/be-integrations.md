@@ -7,7 +7,10 @@ temperature: 0.2
 steps: 50
 permission:
   read: allow
-  edit: allow
+  edit:
+    "*": allow
+    "API.md": deny
+    ".opencode/memory/inbox/be-integrations.md": allow
   glob: allow
   grep: allow
   list: allow

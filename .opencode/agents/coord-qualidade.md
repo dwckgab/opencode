@@ -40,8 +40,7 @@ Leia `.opencode/memory/MEMORIA.md` no início (ex: falsos-positivos conhecidos, 
 1. `qa-unit` — lint + build + testes unit/integração (rápido, falha barato)
 2. `qa-contrato` — frontend x `API.md` x backend real (rotas, métodos, campos, tipos)
 3. `qa-e2e` — fluxos ponta a ponta (login, happy path, 1-2 bordas)
-4. `qa-security` — revisão de segurança (read-only)
-5. `qa-quality` — revisão de bugs/qualidade/performance (read-only)
+4. `qa-security` + `qa-quality` — revisões read-only, rode as duas EM PARALELO após o e2e (são independentes).
 
 Regra de ouro: QA nunca edita produção. Falha? Devolva ao orquestrador com arquivo:linha + dono (`coord-frontend`/`coord-backend`/`coord-plataforma`) + sugestão. Correção volta pelo orquestrador, nunca por você.
 

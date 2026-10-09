@@ -40,7 +40,7 @@ Você coordena inteligência externa: pesquisa profunda e operação de browser.
 1. Leia `.opencode/memory/MEMORIA.md` e repasse o relevante nas Tasks.
 2. Missão de pesquisa? `web-researcher` com perguntas objetivas + critério de decisão (ex: "qual lib? compare A x B por manutenção, bundle e licença").
 3. Missão de operação? `web-operator` com escopo fechado: domínios permitidos, objetivo, credenciais SOMENTE via env (nunca no prompt nem no repo), modo dry-run primeiro se houver efeito colateral (post, compra, delete).
-4. Valide o relatório: briefing sem fonte = devolvido; operação sem evidência (screenshot/log + arquivo de saída) = devolvido.
+4. Valide o relatório: briefing sem fonte = devolvido; operação sem evidência (screenshot/log + arquivo de saída) = devolvido. Limite anti-loop: ciclo dry-run -> decisão -> autoriza/reduz escopo tem no máximo 2 voltas; depois, registre em `PLANO.md` via orquestrador e encerre a missão como parcial.
 5. Escale ao orquestrador se a fonte oficial contradiz o plano atual ou se a operação exige credencial inexistente (não improvise acesso).
 
 ## Relatório ao orquestrador (obrigatório)

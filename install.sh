@@ -26,7 +26,7 @@ fi
 PROJECT_PATH="${1:-.}"
 mkdir -p "$PROJECT_PATH"
 DEST_AGENTS="$PROJECT_PATH/.opencode/agents"
-mkdir -p "$DEST_AGENTS"
+mkdir -p "$DEST_AGENTS" "$PROJECT_PATH/.opencode/memory/inbox"
 cp "${SRC_FILES[@]}" "$DEST_AGENTS/"
 
 if [[ -f "$REPO_ROOT/opencode.json.example" && ! -f "$PROJECT_PATH/opencode.json" ]]; then

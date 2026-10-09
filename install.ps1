@@ -15,19 +15,22 @@ param(
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$SourceAgents = Join-Path $RepoRoot ".opencode\agents\*.md"
-
-if (-not (Test-Path -LiteralPath (Join-Path $RepoRoot ".opencode\agents"))) {
-  throw "Pasta de origem nao encontrada: $(Join-Path $RepoRoot '.opencode\agents'). Rode este script a partir do clone do repo."
+$SourceDir = Join-Path $RepoRoot ".opencode\agents"
+if (-not (Test-Path -LiteralPath $SourceDir)) {
+  throw "Pasta de origem nao encontrada: $SourceDir. Rode este script a partir do clone do repo."
+}
+$SourceFiles = Get-ChildItem -LiteralPath $SourceDir -Filter *.md
+if ($SourceFiles.Count -eq 0) {
+  throw "Nenhum agente encontrado em: $SourceDir."
 }
 
 if ($Global) {
   $DestAgents = Join-Path $env:USERPROFILE ".config\opencode\agents"
   New-Item -ItemType Directory -Path $DestAgents -Force | Out-Null
-  Copy-Item -Path $SourceAgents -Destination $DestAgents -Force
-  Write-Output "Instalado global em: $DestAgents"
+  $SourceFiles | Copy-Item -Destination $DestAgents -Force
+  Write-Output "Instalado global em: $DestAgents (somente agentes; config e memoria sao por projeto)"
   Write-Output "Use: opencode -> Tab ate 'orquestrador'"
-  exit 0
+  return
 }
 
 if (-not (Test-Path -LiteralPath $ProjectPath)) {
@@ -36,7 +39,8 @@ if (-not (Test-Path -LiteralPath $ProjectPath)) {
 $DestRoot = (Resolve-Path -LiteralPath $ProjectPath).Path
 $DestAgents = Join-Path $DestRoot ".opencode\agents"
 New-Item -ItemType Directory -Path $DestAgents -Force | Out-Null
-Copy-Item -Path $SourceAgents -Destination $DestAgents -Force
+$SourceFiles | Copy-Item -Destination $DestAgents -Force
+New-Item -ItemType Directory -Path (Join-Path $DestRoot ".opencode\memory\inbox") -Force | Out-Null
 
 $ExampleJson = Join-Path $RepoRoot "opencode.json.example"
 $TargetJson = Join-Path $DestRoot "opencode.json"
