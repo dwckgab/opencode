@@ -28,6 +28,12 @@ if ($Global) {
   $DestAgents = Join-Path $env:USERPROFILE ".config\opencode\agents"
   New-Item -ItemType Directory -Path $DestAgents -Force | Out-Null
   $SourceFiles | Copy-Item -Destination $DestAgents -Force
+  $SourceSkills = Join-Path $RepoRoot ".opencode\skills"
+  if (Test-Path -LiteralPath $SourceSkills) {
+    $DestSkills = Join-Path $env:USERPROFILE ".config\opencode\skills"
+    New-Item -ItemType Directory -Path $DestSkills -Force | Out-Null
+    Copy-Item -Path (Join-Path $SourceSkills "*") -Destination $DestSkills -Recurse -Force
+  }
   Write-Output "Instalado global em: $DestAgents (somente agentes; config e memoria sao por projeto)"
   Write-Output "Use: opencode -> Tab ate 'orquestrador'"
   return
@@ -41,6 +47,10 @@ $DestAgents = Join-Path $DestRoot ".opencode\agents"
 New-Item -ItemType Directory -Path $DestAgents -Force | Out-Null
 $SourceFiles | Copy-Item -Destination $DestAgents -Force
 New-Item -ItemType Directory -Path (Join-Path $DestRoot ".opencode\memory\inbox") -Force | Out-Null
+$SourceSkills = Join-Path $RepoRoot ".opencode\skills"
+if (Test-Path -LiteralPath $SourceSkills) {
+  Copy-Item -Path $SourceSkills -Destination (Join-Path $DestRoot ".opencode\skills") -Recurse -Force
+}
 
 $ExampleJson = Join-Path $RepoRoot "opencode.json.example"
 $TargetJson = Join-Path $DestRoot "opencode.json"

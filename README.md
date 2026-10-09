@@ -25,8 +25,10 @@ Estrutura deste repo (pronta para copiar):
 .opencode/
   agents/ (25 agentes: orquestrador, 5 coords, 19 workers)
   memory/MEMORIA.md (regras permanentes + aprendizados)
-opencode.json.example (copiado para opencode.json só se não existir)
-install.ps1 / install.sh (instalação por projeto ou -Global/-—global, só agentes no global)
+  skills/ (debug-sistematico, revisao-segura, testes-eficazes)
+opencode.json.example (base)
+opencode.mimo.json.example (provider MiMo + roteamento pro/flash -> copiar para opencode.json)
+install.ps1 / install.sh (por projeto ou -Global / --global; global instala só agentes+skills)
 .gitattributes / .gitignore
 README.md / LICENSE
 ```
@@ -99,6 +101,28 @@ Os agentes aprendem sozinhos ao longo dos projetos via `.opencode/memory/`:
 - `inbox/<agente>.md` — cada worker anexa até 3 lições por tarefa (um arquivo por agente = sem conflito em paralelo). Coords e revisores mandam aprendizados no relatório.
 - O orquestrador consolida o inbox na MEMORIA a cada rodada (com dedupe), apaga o consumido e commita (`docs: atualiza memoria`). Lição vista 3x vira regra permanente.
 - Antiboato: teto de itens, formato de 1 linha (`- [AAAA-MM-DD] contexto: fato -> ação`) e proibição de segredos/dados pessoais. Para recomeçar do zero, apague `inbox/*` e a seção de recentes.
+
+## MiMo V2 (motor de código recomendado)
+
+Os agentes são agnósticos de provider, mas o roteamento pronto usa [Xiaomi MiMo](https://mimo.mi.com/docs) — #1 open-source em SWE-bench, API OpenAI-compatível, contexto até 1M:
+
+1. Crie a chave em `platform.xiaomimimo.com` (API Keys) e exporte: `MIMO_API_KEY=sk-...` (Windows: `[Environment]::SetEnvironmentVariable("MIMO_API_KEY","sk-...", "User")`).
+2. Copie `opencode.mimo.json.example` para `opencode.json` no projeto (só se não existir um).
+3. Rode `opencode` e confira em `/models`: `mimo/mimo-v2.6-pro` e `mimo/mimo-v2.6-flash`.
+
+Roteamento (custo x força): `pro` no orquestrador, coords e implementadores; `flash` (rápido/barato) nos `qa-*`, `web-researcher` e `plat-docs`; `small_model` (títulos etc.) no flash. Modelos verificados na doc oficial: `mimo-v2.6-pro`, `mimo-v2.6-flash`, `mimo-v2.5-pro` (fallback). Sem chave, use qualquer outro provider — os agentes funcionam igual.
+
+## Skills de programação
+
+Em `.opencode/skills/` (instaladas junto; agentes carregam sob demanda via tool `skill`):
+
+| Skill | Quando usar |
+|---|---|
+| `debug-sistematico` | bugs e falhas — reproduzir, isolar, correção mínima + regressão |
+| `testes-eficazes` | criar/consertar testes — pirâmide, bordas, zero flake |
+| `revisao-segura` | auth, dados sensíveis, deploy — checklist + veredito por gravidade |
+
+O orquestrador indica a skill na Task quando aplicável. Novas skills: pasta `.opencode/skills/<nome>/SKILL.md` (nome = pasta, minúsculas com hífen) e `skill: allow` já vem liberado nos agentes.
 
 ## Custos e limites
 

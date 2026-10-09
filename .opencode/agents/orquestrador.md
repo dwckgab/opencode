@@ -45,7 +45,7 @@ NUNCA chame workers direto. Se um coord reportar bloqueio cross-team (ex: fronte
 
 1. **Planejar**: `todowrite` + `PLANO.md` na raiz (Escopo / Contratos / Fases com dono coord-* / Progresso / Decisões).
 2. **Contratos ANTES de paralelizar**: rascunho de `API.md` (rotas, métodos, payloads) + convenções (pastas, `.env.example`, Conventional Commits). Sem contrato, ninguém diverge depois.
-3. **Delegar aos coords em PARALELO**: até 5 Task na mesma mensagem (frontend+backend+plataforma+pesquisa juntos; qualidade entra no passo 5). Anexe em cada Task: fatia do escopo, contratos vigentes, ownership de pastas, restrições.
+3. **Delegar aos coords em PARALELO**: até 5 Task na mesma mensagem (frontend+backend+plataforma+pesquisa juntos; qualidade entra no passo 5). Anexe em cada Task: fatia do escopo, contratos vigentes, ownership de pastas, restrições — e a skill indicada quando aplicável (`debug-sistematico` para bugs, `testes-eficazes` para QA, `revisao-segura` para auth/dados sensíveis).
 4. **Arbitrar**: leia os relatórios dos coords. Conflito cross-team? Decida o padrão, atualize `API.md`/`PLANO.md` (persista aqui os sub-contratos dos coords, pois eles não escrevem arquivos), e re-delegue só o delta.
 5. **Gates via `coord-qualidade` (nesta ordem)**: qa-unit -> qa-contrato -> qa-e2e -> qa-security + qa-quality (estes dois em paralelo, ambos read-only). Se FALHOU/REPROVADO, a correção volta ao coord dono (nunca ao QA). Registre contador por erro em `PLANO.md`/Decisões: 3 tentativas no mesmo erro -> pivote (trocar lib, simplificar).
 6. **Finalizar**: só com `coord-qualidade: LIBERADO` (sem CRÍTICO, e2e passando). Resumo final: o que foi feito, estrutura, como rodar, contratos, débitos técnicos com dono.

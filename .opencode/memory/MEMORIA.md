@@ -47,3 +47,5 @@ Formato: `- [AAAA-MM-DD] contexto: fato -> ação`
 - [2026-10-09] seed/web-operator: sleep fixo no browser quebrou em rede lenta -> waits automáticos + screenshot antes/depois da ação crítica.
 - [2026-10-09] seed/auditoria: 3 agentes editando API.md geraram contrato incoerente -> single-writer (só orquestrador commita, resto propõe diff no relatório).
 - [2026-10-09] seed/auditoria: dois workers no mesmo arquivo em paralelo sobrescreveram código -> 1 arquivo = 1 dono por rodada; transversal (a11y) audita e o dono aplica.
+- [2026-10-09] seed/mimo-v2: QA pesado rodando em modelo pro queimou 3x tokens sem ganho -> rotear qa-*/docs para flash, pro só em implementação e decisão.
+- [2026-10-09] seed/skills: checklist de segurança copiado em 4 prompts divergiu -> centralizar em skill (revisao-segura) e referenciar, não duplicar.

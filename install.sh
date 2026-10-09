@@ -18,6 +18,10 @@ if [[ "${1:-}" == "--global" ]]; then
   DEST="$HOME/.config/opencode/agents"
   mkdir -p "$DEST"
   cp "${SRC_FILES[@]}" "$DEST/"
+  if [[ -d "$REPO_ROOT/.opencode/skills" ]]; then
+    mkdir -p "$HOME/.config/opencode/skills"
+    cp -r "$REPO_ROOT"/.opencode/skills/* "$HOME/.config/opencode/skills/"
+  fi
   echo "Instalado global em: $DEST"
   echo "Use: opencode -> Tab ate 'orquestrador'"
   exit 0
@@ -28,6 +32,10 @@ mkdir -p "$PROJECT_PATH"
 DEST_AGENTS="$PROJECT_PATH/.opencode/agents"
 mkdir -p "$DEST_AGENTS" "$PROJECT_PATH/.opencode/memory/inbox"
 cp "${SRC_FILES[@]}" "$DEST_AGENTS/"
+if [[ -d "$REPO_ROOT/.opencode/skills" ]]; then
+  mkdir -p "$PROJECT_PATH/.opencode/skills"
+  cp -r "$REPO_ROOT"/.opencode/skills/* "$PROJECT_PATH/.opencode/skills/"
+fi
 
 if [[ -f "$REPO_ROOT/opencode.json.example" && ! -f "$PROJECT_PATH/opencode.json" ]]; then
   cp "$REPO_ROOT/opencode.json.example" "$PROJECT_PATH/opencode.json"
